@@ -1669,6 +1669,7 @@ $this->permission1->method('add_product_group', 'create')->access()
             || $this->permission1->method('payment_report', 'read')->access()
             || $this->permission1->method('receipt_report', 'read')->access()
             || $this->permission1->method('contra_voucher_report', 'read')->access()
+            ||$this->permission1->method('commission_wise_sales_report', 'read')->access()
 
 
 
@@ -1698,6 +1699,7 @@ $this->permission1->method('add_product_group', 'create')->access()
                                     || $this->uri->segment('1') == ("purchase_report_productwise")
                                     || $this->uri->segment('1') == ("payment_report") || $this->uri->segment('1') == ("receipt_report")
                                     || $this->uri->segment('1') == ("contra_voucher_report")
+                                    ||$this->uri->segment('1') == ("commission_wise_sales_report") 
 
                                 ) {
                                     echo "active";
@@ -1838,7 +1840,8 @@ $this->permission1->method('add_product_group', 'create')->access()
                     <?php if (
                         $this->permission1->method('sales_order_report', 'read')->access() ||
                         $this->permission1->method('todays_sales_report', 'read')->access()
-                        || $this->permission1->method('user_wise_sales_report', 'read')->access() ||
+                        || $this->permission1->method('user_wise_sales_report', 'read')->access()
+                        || $this->permission1->method('commission_wise_sales_report', 'read')->access() ||
                         $this->permission1->method('product_wise_sales_report', 'read')->access() ||
                         $this->permission1->method('sales_report_category_wise', 'read')->access() ||
                         $this->permission1->method('sales_return_report', 'read')->access()
@@ -1849,6 +1852,7 @@ $this->permission1->method('add_product_group', 'create')->access()
                                                 $this->uri->segment('1') == ("sales_order_report") ||
                                                 $this->uri->segment('1') == ("sales_report") ||
                                                 $this->uri->segment('1') == ("userwise_sales_report") ||
+                                                $this->uri->segment('1') == ("commission_wise_sales_report") ||
                                                 $this->uri->segment('1') == ("product_wise_sales_report") ||
                                                 $this->uri->segment('1') == ("category_sales_report") ||
                                                 $this->uri->segment('1') == ("sales_return_report")
@@ -1896,6 +1900,15 @@ $this->permission1->method('add_product_group', 'create')->access()
                                                             echo " ";
                                                         } ?>"><a
                                             href="<?php echo base_url('userwise_sales_report') ?>"><?php echo display('user_wise_sales_report') ?></a>
+                                    </li>
+                                <?php } ?>
+                                <?php if ($this->permission1->method('commission_wise_sales_report', 'read')->access()) { ?>
+                                    <li class="treeview <?php if ($this->uri->segment('1') == ("commission_wise_sales_report")) {
+                                                            echo "active";
+                                                        } else {
+                                                            echo " ";
+                                                        } ?>"><a
+                                            href="<?php echo base_url('commission_wise_sales_report') ?>"><?php echo display('commission_wise_sales_report') ?></a>
                                     </li>
                                 <?php } ?>
 
@@ -2531,4 +2544,4 @@ $this->permission1->method('add_product_group', 'create')->access()
 
 
     </ul>
-</div> <!-- /.sidebar -->
+</div> <!-- /.sidebar -->
