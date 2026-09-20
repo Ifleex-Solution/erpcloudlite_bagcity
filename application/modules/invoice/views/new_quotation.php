@@ -857,7 +857,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8" class="text-right"><b><?php echo display('total') ?>:</b></td>
+                                <td colspan="8" class="text-right tfoot-vat-colspan"><b><?php echo display('total') ?>:</b></td>
                                 <td class="text-right">
                                     <input type="text" id="Total" class="text-right form-control" name="total" value="0.00" readonly="readonly" />
                                 </td>
@@ -868,36 +868,36 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="text-right"><b>Sale Discount:</b></td>
+                                <td colspan="8" class="text-right tfoot-vat-colspan"><b>Sale Discount:</b></td>
                                 <td class="text-right">
                                     <input type="text" id="discount" class="text-right form-control discount total_discount_val" onkeyup="calculate_sum(1)" name="discount" placeholder="0.00" value="" />
                                 </td>
                                 <td></td>
                             </tr>
                              <tr>
-                                <td colspan="8" class="text-right"><b>Guide Commission:</b></td>
+                                <td colspan="8" class="text-right tfoot-vat-colspan"><b>Guide Commission:</b></td>
                                 <td class="text-right">
                                     <input type="text" id="guidecommission" class="form-control text-right" name="guidecommission" value="0.00" />
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="text-right"><b><?php echo display('total_discount') ?>:</b></td>
+                                <td colspan="8" class="text-right tfoot-vat-colspan"><b><?php echo display('total_discount') ?>:</b></td>
                                 <td class="text-right">
                                     <input type="text" id="total_discount_ammount" class="form-control text-right" name="total_discount" value="0.00" readonly="readonly" />
                                 </td>
                                 <td></td>
                             </tr>
-                           
+
                             <tr>
-                                <td class="text-right vathidden" colspan="8"><b><?php echo display('ttl_val') ?>:</b></td>
+                                <td class="text-right vathidden tfoot-vat-colspan" colspan="8"><b><?php echo display('ttl_val') ?>:</b></td>
                                 <td class="text-right vathidden">
                                     <input type="text" id="total_vat_amnt" class="form-control text-right" name="total_vat_amnt" value="0.00" readonly="readonly" />
                                 </td>
                                 <td class="vathidden"></td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="text-right"><b><?php echo display('grand_total') ?>:</b></td>
+                                <td colspan="8" class="text-right tfoot-vat-colspan"><b><?php echo display('grand_total') ?>:</b></td>
                                 <td class="text-right">
                                     <input type="text" id="grandTotal" class="text-right form-control grandTotalamnt" name="grand_total_price" placeholder="0.00" value="00" readonly />
                                 </td>
@@ -1208,9 +1208,10 @@ echo "</script>";
                             document.querySelectorAll('.vatshow').forEach(el => {
                                 el.style.display = 'none';
                             });
+                            setVatColspan(true);
                         } else {
                             document.getElementById('vat_percent' + a).value = 0;
-
+                            setVatColspan(false);
                         }
                         document.getElementById('vat_value' + a).value = sales[i].vat_value;
                         document.getElementById('total_price' + a).value = sales[i].total_price;
@@ -1716,6 +1717,12 @@ echo "</script>";
 
     }
 
+    function setVatColspan(isVat) {
+        document.querySelectorAll('.tfoot-vat-colspan').forEach(el => {
+            el.colSpan = isVat ? 9 : 8;
+        });
+    }
+
     function incidetTypechange() {
 
         clearDetails2()
@@ -1730,6 +1737,7 @@ echo "</script>";
             document.querySelectorAll('.vatshow').forEach(el => {
                 el.style.display = 'none';
             });
+            setVatColspan(true);
 
 
         } else {
@@ -1740,6 +1748,7 @@ echo "</script>";
             document.querySelectorAll('.vatshow').forEach(el => {
                 el.style.display = 'table-cell';
             });
+            setVatColspan(false);
         }
 
     }
